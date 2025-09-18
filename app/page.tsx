@@ -1,61 +1,52 @@
 'use client';
 
-import { Box, Text } from '@mantine/core';
+import { useRouter } from 'next/navigation';
+import { Box, Button, Center, Loader, Stack, Text } from '@mantine/core';
 import { Welcome } from '../components/Welcome/Welcome';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function HomePage() {
+  const { user, loading, signIn } = useAuth();
+  const router = useRouter();
+
+  if (loading) {
+    return (
+      <Center h="100vh">
+        <Loader size="lg" />
+      </Center>
+    );
+  }
+
+  if (user) {
+    router.push('/dashboard');
+    return null;
+  }
+
   return (
-    <>
+    <Stack align="center" justify="center" h="100vh" p="xl">
       <Welcome />
 
       <Box
-        p="md"
+        p="xl"
         style={{
-          backgroundColor: 'light-dark(#FFFFFF, #000000)',
-          color: 'light-dark(#000000, #FFFFFF)',
-          borderRadius: '8px',
-          transition: 'background-color 0.3s ease, color 0.3s ease',
+          backgroundColor: 'light-dark(#FFFFFF, #1A1B1E)',
+          borderRadius: '12px',
+          textAlign: 'center',
+          maxWidth: '500px',
         }}
       >
-        <Text ff="monospace">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-          laboris nisi ut aliquip ex ea commodo consequat. ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <Text size="lg" mb="md" ff="arial">
+          Sign in with Google to see your Uber stats
         </Text>
-        <Text ff="monospace">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-          laboris nisi ut aliquip ex ea commodo consequat. ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+        <Text size="sm" c="dimmed" mb="xl">
+          Connect your Gmail to analyze your Uber ride and food delivery history
         </Text>
-        <Text ff="monospace">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-          laboris nisi ut aliquip ex ea commodo consequat. ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </Text>
+
+        <Button size="lg" onClick={signIn} leftSection="🔗">
+          Sign in with Google
+        </Button>
       </Box>
-    </>
+    </Stack>
   );
 }

@@ -14,8 +14,10 @@ export function Footer() {
         borderTop: '1px solid var(--mantine-color-default-border)',
         paddingTop: 'var(--mantine-spacing-md)',
         paddingBottom: 'var(--mantine-spacing-md)',
+        // No need for marginTop: auto here because the content above has flexGrow: 1
       }}
     >
+      {' '}
       <Container size="xl">
         <Group justify="space-between" wrap="wrap">
           {/* Left side - Logo and copyright */}

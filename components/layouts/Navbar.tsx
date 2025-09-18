@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Anchor, Box, Group, Text } from '@mantine/core';
 import { ColorToggleButton } from '../ColorSchemeToggle/ColorToggleButton';
 
@@ -45,7 +44,7 @@ export function Navbar() {
             </Text>
           </Box>
           <Text size="lg" fw={600} visibleFrom="xs">
-            Logo
+            Uber Stats Scrape
           </Text>
         </Group>
 
